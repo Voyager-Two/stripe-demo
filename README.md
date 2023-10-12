@@ -21,7 +21,7 @@
 - [Typescript](https://www.typescriptlang.org)
 - [TailwindCSS](https://tailwindcss.com/)
 - [NextUI v2](https://nextui.org) for UI components
-- [Framer Motion](https://www.framer.com/motion)
+- [Framer Motion](https://www.framer.com/motion) for animations
 - [React Hook Form](https://react-hook-form.com) + [Yup](https://github.com/jquense/yup) for form validation
 - [Vercel](https://vercel.com/) for hosting + serverless functions
 
