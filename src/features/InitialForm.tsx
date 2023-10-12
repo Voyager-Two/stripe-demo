@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Divider, Input, Radio, RadioGroup, Spacer } from "@nextui-org/react";
+import { Button, Divider, Input, Radio, RadioGroup, Select, SelectItem } from "@nextui-org/react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,19 @@ import * as Yup from "yup";
 import { useAppSelector, useAppDispatch } from "@app/hooks";
 import { getPaymentInfo, updatePaymentInfo } from "@app/state/paymentSlice";
 import clsx from "clsx";
+
+const usStates = [
+  "AL", "AK", "AZ", "AR", "CA",
+  "CO", "CT", "DE", "FL", "GA",
+  "HI", "ID", "IL", "IN", "IA", "KS",
+  "KY", "LA", "ME", "MD", "MA",
+  "MI", "MN", "MS", "MO", "MT",
+  "NE", "NV", "NH", "NJ", "NM",
+  "NY", "NC", "ND", "OH", "OK",
+  "OR", "PA", "RI", "SC", "SD",
+  "TN", "TX", "UT", "VT", "VA", "WA",
+  "WV", "WI", "WY"
+];
 
 export const CustomRadio = (props: any) => {
   const { children, ...otherProps } = props;
@@ -122,19 +135,24 @@ const InitialForm = () => {
           />
         </div>
         <div>
-          {/* This should be a dropdown but UI library hasn't added that yet */}
-          <Input
+          <Select
             required
-            label="State (2 letter)"
-            placeholder="State"
+            label="State"
+            placeholder="Select your state"
             isInvalid={Boolean(errors.state)}
             {...register("state")}
-          />
+          >
+            {usStates.map((state) => (
+              <SelectItem key={state} value={state}>
+                {state}
+              </SelectItem>
+            ))}
+          </Select>
         </div>
       </div>
 
       <Divider className="my-4" />
-      <h3 className="text-sm font-bold mb-2">Choose a plan</h3>
+      <h3 className="text-sm font-bold mb-3">Choose a plan</h3>
 
       <RadioGroup defaultValue="A" size="sm" onValueChange={handlePlanChange}>
         <CustomRadio value="A" description="monthly recurring">
