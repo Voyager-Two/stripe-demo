@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Button, Divider, Input, Radio, RadioGroup, Spacer } from '@nextui-org/react';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Button, Divider, Input, Radio, RadioGroup, Spacer } from "@nextui-org/react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
-import { useAppSelector, useAppDispatch } from '@app/hooks';
-import { getPaymentInfo, updatePaymentInfo } from '@app/state/paymentSlice';
+import { useAppSelector, useAppDispatch } from "@app/hooks";
+import { getPaymentInfo, updatePaymentInfo } from "@app/state/paymentSlice";
 import clsx from "clsx";
 
 export const CustomRadio = (props: any) => {
-  const {children, ...otherProps} = props;
+  const { children, ...otherProps } = props;
 
   return (
     <Radio
@@ -19,7 +19,7 @@ export const CustomRadio = (props: any) => {
         base: clsx(
           "inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between",
           "flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent",
-          "data-[selected=true]:border-primary"
+          "data-[selected=true]:border-primary",
         ),
       }}
     >
@@ -34,11 +34,11 @@ const InitialForm = () => {
   const [isLoading, setLoading] = useState(false);
 
   const formValidation = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    address: Yup.string().required('Address is required'),
-    city: Yup.string().required('City is required'),
-    zipcode: Yup.number().required('ZIP Code is required'),
-    state: Yup.string().required('State is required'),
+    name: Yup.string().required("Name is required"),
+    address: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
+    zipcode: Yup.number().required("ZIP Code is required"),
+    state: Yup.string().required("State is required"),
     discountCode: Yup.string().optional(),
   });
   const formOptions = { resolver: yupResolver(formValidation) };
@@ -55,21 +55,22 @@ const InitialForm = () => {
     const { plan, discountCode, billingInfo } = paymentInfo;
     setLoading(true);
     await axios
-      .post('/api/subscription/create', { plan, discountCode, state: billingInfo?.state })
-      .then((r) => {
-        if (!r?.data?.apiData) {
+      .post("/api/create-subscription", { plan, discountCode, state: billingInfo?.state })
+      .then((response) => {
+        if (!response?.data?.stripeResponse) {
+          console.log("createResult", response);
           return;
         }
-        const data = r.data.apiData;
+        const data = response.data.stripeResponse;
         // TODO: use logger
-        console.log('createResult', data);
+        console.log("createResult", data);
         dispatch(
           updatePaymentInfo({
-            status: 'need-payment',
+            status: "need-payment",
             subscriptionId: data.subscriptionId,
             clientSecret: data.clientSecret,
             displayApiData: data.rawResponse,
-          })
+          }),
         );
       })
       .finally(() => {
@@ -79,9 +80,7 @@ const InitialForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h4 className="text-sm font-bold">
-        Enter billing address
-      </h4>
+      <h4 className="text-sm font-bold">Enter billing address</h4>
       <div className="mt-1">
         <div>
           <Input
@@ -89,7 +88,7 @@ const InitialForm = () => {
             label="Name"
             placeholder="Name"
             isInvalid={Boolean(errors.name)}
-            {...register('name')}
+            {...register("name")}
           />
         </div>
         <Spacer y={3.5} />
@@ -99,7 +98,7 @@ const InitialForm = () => {
             label="Address"
             placeholder="Address"
             isInvalid={Boolean(errors.address)}
-            {...register('address')}
+            {...register("address")}
           />
         </div>
         <div>
@@ -109,7 +108,7 @@ const InitialForm = () => {
             label="City"
             placeholder="City"
             isInvalid={Boolean(errors.city)}
-            {...register('city')}
+            {...register("city")}
           />
         </div>
         <div>
@@ -120,7 +119,7 @@ const InitialForm = () => {
             placeholder="ZIP Code"
             type="number"
             isInvalid={Boolean(errors.zipcode)}
-            {...register('zipcode')}
+            {...register("zipcode")}
           />
         </div>
         <div>
@@ -130,15 +129,13 @@ const InitialForm = () => {
             label="State (2 letter)"
             placeholder="State"
             isInvalid={Boolean(errors.state)}
-            {...register('state')}
+            {...register("state")}
           />
         </div>
       </div>
 
       <Divider className="my-4" />
-      <h3 className="text-sm font-bold">
-        Choose a plan
-      </h3>
+      <h3 className="text-sm font-bold">Choose a plan</h3>
 
       <RadioGroup defaultValue="A" size="sm" onValueChange={handlePlanChange}>
         <CustomRadio value="A" description="monthly recurring">
@@ -156,7 +153,7 @@ const InitialForm = () => {
             width="180px"
             placeholder="Discount code"
             color="primary"
-            {...register('discountCode')}
+            {...register("discountCode")}
           />
         </div>
       </div>
@@ -164,7 +161,7 @@ const InitialForm = () => {
       <Divider className="mt-2 mb-4" />
 
       <div className="justify-space-around">
-        <Button isLoading={isLoading} disabled={isLoading} size="md">
+        <Button type="submit" isLoading={isLoading} disabled={isLoading} size="md">
           Continue
         </Button>
       </div>

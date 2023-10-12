@@ -1,28 +1,18 @@
-import { supabase } from "@app/utils/supabaseClient";
-
-// export const config = {
-//   runtime: "experimental-edge",
-// };
+import StripeService from "@app/util/stripe.service";
 
 export default async function handler(req: { body: any }, res: any) {
   // TODO: data validation
-  // const allowedParams = ["item_name", "artist_name", "price", "image_url"];
-  // const params: any = [];
-  //
-  // req.body.forEach((value, key) => {
-  //   if (allowedParams.includes(key)) {
-  //     params[key] = value;
-  //   }
-  // });
 
-  const { data: dbResults, error: dbError } = await supabase
-    .from("marketplace_seller_listings")
-    .insert(req.body).select();
+  try {
+    const stripeService = new StripeService();
+    const stripeResponse = await stripeService.createSubscription(req.body);
 
-  if (dbError) {
-    console.log(dbError);
-    return res.status(500).send({ error: "Database error." });
+    if (!stripeResponse?.subscriptionId) {
+      return res.status(500).send({ error: "Stripe API error when creating subscription." });
+    }
+
+    return res.status(200).send({ success: true, stripeResponse });
+  } catch (err) {
+    return res.status(500).send({ error: "Stripe API error." });
   }
-
-  return res.status(200).send({ data: { success: true, listing: dbResults[0] } });
 }
