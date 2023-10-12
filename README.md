@@ -1,5 +1,5 @@
 ## Stripe payment integration demo
-### Site: [tech-demo-ivory.vercel.app](https://tech-demo-ivory.vercel.app/)
+### Site: https://stripe-demo-emre.vercel.app/
 
 ---
 
