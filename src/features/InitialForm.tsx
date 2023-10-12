@@ -80,8 +80,8 @@ const InitialForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h4 className="text-sm font-bold">Enter billing address</h4>
-      <div className="mt-1">
+      <h4 className="text-sm font-bold mb-3">Enter billing address</h4>
+      <div className="mt-1 space-y-4">
         <div>
           <Input
             required
@@ -91,7 +91,6 @@ const InitialForm = () => {
             {...register("name")}
           />
         </div>
-        <Spacer y={3.5} />
         <div>
           <Input
             required
@@ -135,7 +134,7 @@ const InitialForm = () => {
       </div>
 
       <Divider className="my-4" />
-      <h3 className="text-sm font-bold">Choose a plan</h3>
+      <h3 className="text-sm font-bold mb-2">Choose a plan</h3>
 
       <RadioGroup defaultValue="A" size="sm" onValueChange={handlePlanChange}>
         <CustomRadio value="A" description="monthly recurring">
@@ -146,22 +145,21 @@ const InitialForm = () => {
         </CustomRadio>
       </RadioGroup>
 
-      <Divider className="mt-4 mb-2" />
-      <div>
-        <div>
-          <Input
-            width="180px"
-            placeholder="Discount code"
-            color="primary"
-            {...register("discountCode")}
-          />
-        </div>
+      <Divider className="mt-5 mb-3" />
+
+      <div className="mt-4 mb-5">
+        <Input
+          width="180px"
+          placeholder="Discount code"
+          color="primary"
+          {...register("discountCode")}
+        />
       </div>
 
-      <Divider className="mt-2 mb-4" />
+      {/*<Divider className="mt-2 mb-6" />*/}
 
       <div className="justify-space-around">
-        <Button type="submit" isLoading={isLoading} disabled={isLoading} size="md">
+        <Button color="primary" variant="solid" fullWidth type="submit" isLoading={isLoading} disabled={isLoading} size="md">
           Continue
         </Button>
       </div>

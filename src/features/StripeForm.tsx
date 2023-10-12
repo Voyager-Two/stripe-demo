@@ -85,7 +85,7 @@ const StripeForm = () => {
     <div>
       <div>
         <h3 className="text-sm font-bold">
-          Enter card information to finalize
+          Enter card details
         </h3>
       </div>
       <form id="stripe-demo-form" onSubmit={handleSubmit}>
@@ -94,8 +94,8 @@ const StripeForm = () => {
       <h3 className="my-3 text-red">
         {messages}
       </h3>
-      <div className="flex justify-space-around my-5">
-        <Button disabled={isLoading} isLoading={isLoading} size="md" form="stripe-demo-form">
+      <div className="flex justify-space-around mt-5">
+        <Button color="primary" variant="solid" fullWidth disabled={isLoading} isLoading={isLoading} size="md" form="stripe-demo-form">
           Subscribe
         </Button>
       </div>

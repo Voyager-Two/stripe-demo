@@ -17,7 +17,7 @@ const Checkout: NextPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center my-3 mt-9">
-      <Card className="flex justify-center w-96">
+      <Card className="flex justify-center w-96 mb-5">
         <CardHeader>
           <Link href="/">
             <h3 className="text-lg font-bold">Stripe Demo</h3>
