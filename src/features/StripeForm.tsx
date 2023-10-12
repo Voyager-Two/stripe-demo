@@ -95,7 +95,7 @@ const StripeForm = () => {
         {messages}
       </h3>
       <div className="flex justify-space-around mt-5">
-        <Button color="primary" variant="solid" fullWidth disabled={isLoading} isLoading={isLoading} size="md" form="stripe-demo-form">
+        <Button type="submit" color="primary" variant="solid" fullWidth disabled={isLoading} isLoading={isLoading} size="md" form="stripe-demo-form">
           Subscribe
         </Button>
       </div>
