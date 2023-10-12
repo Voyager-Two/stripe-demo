@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react';
 import { useEffect, useRef } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import type { AppDispatch, AppState } from '@app/store';
+import type { AppDispatch, AppState } from '@app/state/store';
 import { CallbackFuncAny } from '@app/types';
 
 export const useForm =
