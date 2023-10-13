@@ -23,7 +23,7 @@
 - [NextUI v2](https://nextui.org) for UI components
 - [Framer Motion](https://www.framer.com/motion) for animations
 - [React Hook Form](https://react-hook-form.com) + [Yup](https://github.com/jquense/yup) for form validation
-- [Vercel](https://vercel.com/) for hosting + serverless functions 
+- [Vercel](https://vercel.com/) for hosting + serverless functions
 
 ### What can be improved
 - Harden validation for API endpoints

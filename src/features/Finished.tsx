@@ -32,7 +32,7 @@ const Finished = () => {
   };
 
   return (
-    <div className="justify-center mt-5">
+    <div className="justify-center mt-2">
       {paymentInfo.status === 'finished' && (
         <div>
           <div>
@@ -41,7 +41,7 @@ const Finished = () => {
             </h3>
           </div>
           <div>
-            <Button isLoading={refundIsLoading} disabled={refundIsLoading} size="md" onClick={handleRefund}>
+            <Button color="warning" fullWidth className="mt-3" isLoading={refundIsLoading} disabled={refundIsLoading} size="md" onClick={handleRefund}>
               Cancel & Refund
             </Button>
           </div>
