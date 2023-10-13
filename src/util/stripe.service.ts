@@ -69,7 +69,7 @@ export default class StripeService {
     };
   }
 
-  async cancelSubscription(refundInfo: ICancelSubscription): Promise<object> {
+  async cancelSubscription(refundInfo: ICancelSubscription): Promise<any> {
     const subscription: Stripe.Subscription = await this.stripeClient.subscriptions.retrieve(
       <string>refundInfo.subscriptionId,
       {

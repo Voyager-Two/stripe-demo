@@ -18,13 +18,13 @@ const Finished = () => {
     setRefundLoading(true);
     const { subscriptionId } = paymentInfo;
     await axios
-      .post('/api/subscription/cancel', { subscriptionId })
+      .post('/api/cancel-subscription', { subscriptionId })
       .then((r) => {
-        if (!r?.data?.apiData) {
+        if (!r?.data?.stripeResponse) {
           return;
         }
-        console.log('cancelResult', r.data.apiData);
-        dispatch(updatePaymentInfo({ status: 'refunded', displayApiData: r.data.apiData }));
+        console.log('cancelResult', r.data.stripeResponse);
+        dispatch(updatePaymentInfo({ status: 'refunded', displayApiData: r.data.stripeResponse }));
       })
       .finally(() => {
         setRefundLoading(false);
@@ -51,7 +51,7 @@ const Finished = () => {
       {paymentInfo.status === 'refunded' && (
         <div>
           <div color="$purple500" className="font-bold">
-            Cancelled subscription and refunded invoice.
+            Successfully cancelled subscription and refunded invoice.
           </div>
         </div>
       )}
