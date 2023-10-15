@@ -1,5 +1,5 @@
 ## Stripe payment integration demo
-### Site: https://stripe-demo-emre.vercel.app/
+### Site: https://stripe.emre.earth/
 
 ---
 
