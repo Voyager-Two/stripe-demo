@@ -4,6 +4,7 @@
         "paths": {
             "@app/*": ["src/*"],
             "@feature/*": ["src/features/*"],
+            "@modules/*": ["src/modules/*"],
         },
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],

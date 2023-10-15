@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 import { useAppSelector, useAppDispatch } from "@app/hooks";
 import { getPaymentInfo, updatePaymentInfo } from "@app/state/paymentSlice";
-import clsx from "clsx";
+import CustomRadio from "@app/modules/CustomRadio";
 
 const usStates = [
   "AL", "AK", "AZ", "AR", "CA",
@@ -21,25 +21,6 @@ const usStates = [
   "TN", "TX", "UT", "VT", "VA", "WA",
   "WV", "WI", "WY"
 ];
-
-export const CustomRadio = (props: any) => {
-  const { children, ...otherProps } = props;
-
-  return (
-    <Radio
-      {...otherProps}
-      classNames={{
-        base: clsx(
-          "inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between",
-          "flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent",
-          "data-[selected=true]:border-primary",
-        ),
-      }}
-    >
-      {children}
-    </Radio>
-  );
-};
 
 const InitialForm = () => {
   const paymentInfo = useAppSelector(getPaymentInfo);
