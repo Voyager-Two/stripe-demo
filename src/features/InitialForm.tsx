@@ -31,7 +31,7 @@ const InitialForm = () => {
     name: Yup.string().required("Name is required"),
     address: Yup.string().required("Address is required"),
     city: Yup.string().required("City is required"),
-    zipcode: Yup.number().required("ZIP Code is required"),
+    zipcode: Yup.number().typeError('Zip Code is required').required("ZIP Code is required"),
     state: Yup.string().required("State is required"),
     discountCode: Yup.string().optional(),
   });
@@ -82,6 +82,7 @@ const InitialForm = () => {
             label="Name"
             placeholder="Name"
             isInvalid={Boolean(errors.name)}
+            errorMessage={errors.name?.message}
             {...register("name")}
           />
         </div>
@@ -91,6 +92,7 @@ const InitialForm = () => {
             label="Address"
             placeholder="Address"
             isInvalid={Boolean(errors.address)}
+            errorMessage={errors.address?.message}
             {...register("address")}
           />
         </div>
@@ -101,6 +103,7 @@ const InitialForm = () => {
             label="City"
             placeholder="City"
             isInvalid={Boolean(errors.city)}
+            errorMessage={errors.city?.message}
             {...register("city")}
           />
         </div>
@@ -112,6 +115,7 @@ const InitialForm = () => {
             placeholder="ZIP Code"
             type="number"
             isInvalid={Boolean(errors.zipcode)}
+            errorMessage={errors.zipcode?.message}
             {...register("zipcode")}
           />
         </div>
@@ -121,6 +125,7 @@ const InitialForm = () => {
             label="State"
             placeholder="Select your state"
             isInvalid={Boolean(errors.state)}
+            errorMessage={errors.state?.message}
             {...register("state")}
           >
             {usStates.map((state) => (
@@ -135,7 +140,7 @@ const InitialForm = () => {
       <Divider className="my-4" />
       <h3 className="text-sm font-bold mb-3">Choose a plan</h3>
 
-      <RadioGroup defaultValue="A" size="sm" onValueChange={handlePlanChange}>
+      <RadioGroup isRequired size="sm" onValueChange={handlePlanChange}>
         <CustomRadio value="A" description="monthly recurring">
           $2.99
         </CustomRadio>
@@ -149,7 +154,7 @@ const InitialForm = () => {
       <div className="mt-4 mb-5">
         <Input
           width="180px"
-          placeholder="Discount code"
+          label="Discount code"
           color="primary"
           {...register("discountCode")}
         />

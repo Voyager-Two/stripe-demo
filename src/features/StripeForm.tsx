@@ -91,7 +91,7 @@ const StripeForm = () => {
       <form id="stripe-demo-form" onSubmit={handleSubmit}>
         <CardElement options={options} />
       </form>
-      <h3 className="my-3 text-red">
+      <h3 className="my-3 text-sm text-[#C20E4D]">
         {messages}
       </h3>
       <div className="flex justify-space-around mt-5">
